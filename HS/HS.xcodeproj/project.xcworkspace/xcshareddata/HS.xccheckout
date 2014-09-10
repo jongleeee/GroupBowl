@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>984A8CF9-D071-444A-A99A-AE06163B9624</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HS</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</key>
+		<string>ssh://github.com/heapstack/groupApp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HS/HS.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/heapstack/groupApp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HS</string>
+		</dict>
+	</array>
+</dict>
+</plist>
