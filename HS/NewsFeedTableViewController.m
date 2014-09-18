@@ -60,6 +60,8 @@
         }
         else
         {
+
+            
             NSLog(@"SELECTED GROUP EXIST");
             appDelegate.currentGroupName = appDelegate.selectedGroup[@"name"];
             NSString *currentNewsFeed = [appDelegate.currentGroupName stringByAppendingString:addNewsFeed];
@@ -79,8 +81,11 @@
                     [self.tableView reloadData];
                 }
             }];
+            
+      
         }
         [self.tableView reloadData];
+        
 
         
 
@@ -92,7 +97,7 @@
 
     }
     
-    NSLog(@"ZXCVZCVZ: %@", self.newsList);
+    NSLog(@"ZXCVZCVZ: %d", [self.newsList count]);
 
    
     
@@ -188,7 +193,7 @@
    
     NSString *groupName = appDelegate.currentGroupName;
     PFQuery *query = [PFQuery queryWithClassName:groupName];
-    [query whereKey:@"object" equalTo:appDelegate.currentUserName];
+    [query whereKey:@"userNAME" equalTo:appDelegate.currentUserName];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (error)
         {

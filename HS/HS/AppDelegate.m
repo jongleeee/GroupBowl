@@ -20,6 +20,8 @@
 
     // Override point for customization after application launch.
     
+    [NSThread sleepForTimeInterval:1.3];
+    
     [Parse setApplicationId:@"nqi7esegIm4RP8lREeDJ2TAkVXFvaxZiKArce63Y"
                   clientKey:@"BFSzX2cK1IiDXKKU9ax7pHu8fIOBfUcX1GwdZy4L"];
     
@@ -46,6 +48,7 @@
         
         
         self.currentQuery = [PFQuery queryWithClassName:groupList];
+        [self.currentQuery whereKey:@"group" equalTo:@"group"];
         
         [self.currentQuery orderByDescending:@"updatedAt"];
 

@@ -32,6 +32,8 @@
                                    action:@selector(dismissKeyboard)];
     
     [self.view addGestureRecognizer:tap];
+    
+    self.currentEmail.text = self.currentUser[@"email"];
 
     
 

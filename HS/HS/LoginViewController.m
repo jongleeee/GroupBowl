@@ -42,6 +42,7 @@
 - (IBAction)loginPressed:(id)sender {
     
     
+    
     NSString *parse_emailField = [self.emailField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSString *parse_passwordField = [self.passwordField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
@@ -62,7 +63,6 @@
                                                 [alert show];
                                             } else {
                                                 appDelegate.currentUser = user;
-
                                                 [self.navigationController popToRootViewControllerAnimated:NO];
                                             }
                                         }];

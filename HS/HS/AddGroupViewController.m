@@ -79,7 +79,7 @@
                 {
                     
                             PFObject *addGroup = [PFObject objectWithClassName:groupList];
-                    
+                            addGroup[@"group"] = @"group";
                             addGroup[@"name"] = self.groupName.text;
                     
                             [addGroup saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

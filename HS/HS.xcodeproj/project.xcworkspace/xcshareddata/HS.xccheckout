@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>984A8CF9-D071-444A-A99A-AE06163B9624</string>
+	<string>4C10E662-878D-4A66-BA7E-64C900FA7A84</string>
 	<key>IDESourceControlProjectName</key>
 	<string>HS</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</key>
-		<string>ssh://github.com/heapstack/groupApp.git</string>
+		<key>235A4C1D-0284-404D-8E62-E80F4E1D567C</key>
+		<string>ssh://github.com/jongleeee/GroupBowl.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>HS/HS.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</key>
+		<key>235A4C1D-0284-404D-8E62-E80F4E1D567C</key>
 		<string>../../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/heapstack/groupApp.git</string>
+	<string>ssh://github.com/jongleeee/GroupBowl.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</string>
+	<string>235A4C1D-0284-404D-8E62-E80F4E1D567C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>21DFE4D1-27CB-4D8D-8C7C-48BEE019980E</string>
+			<string>235A4C1D-0284-404D-8E62-E80F4E1D567C</string>
 			<key>IDESourceControlWCCName</key>
 			<string>HS</string>
 		</dict>

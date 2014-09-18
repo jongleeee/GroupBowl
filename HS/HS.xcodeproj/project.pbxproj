@@ -728,7 +728,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b83d4d01-5630-47a2-94c2-9d2547ad8497";
+				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -748,7 +748,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b83d4d01-5630-47a2-94c2-9d2547ad8497";
+				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -843,7 +843,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b83d4d01-5630-47a2-94c2-9d2547ad8497";
+				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
