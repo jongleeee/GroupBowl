@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import <Venmo-iOS-SDK/Venmo.h>
 
 @implementation AppDelegate
 
@@ -27,67 +28,100 @@
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [application registerForRemoteNotificationTypes:
-     UIRemoteNotificationTypeBadge |
-     UIRemoteNotificationTypeAlert |
-     UIRemoteNotificationTypeSound];
+    UIUserNotificationSettings *settings =
+    [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert |
+     UIUserNotificationTypeBadge |
+     UIUserNotificationTypeSound
+                                      categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.749 green:0.176 blue:0.263 alpha:1]];
     
-
+    
+    
+    
+    // GroupBowl
     
     self.currentUser = [PFUser currentUser];
+    
     if (self.currentUser)
     {
-        
-        
-        
-        self.currentUserName = self.currentUser[@"username"];
-        NSString *getList = @"_GroupList";
-        NSString *groupList = [self.currentUser[@"username"] stringByAppendingString:getList];
-        
-        
-        self.currentQuery = [PFQuery queryWithClassName:groupList];
-        [self.currentQuery whereKey:@"group" equalTo:@"group"];
-        
-        [self.currentQuery orderByDescending:@"updatedAt"];
+        self.currentEmail = self.currentUser[@"email"];
+        self.currentName = self.currentUser[@"name"];
+        self.currentPhoneNumber = self.currentUser[@"phone"];
 
+       
         
-        [self.currentQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-
-
-            if (error)
-            {
-
-                
-                NSLog(@"error: %@", error);
-            }
-            else
-            {
-
-                if ([objects count] == 1)
-                {
-                    self.group = NO;
-                    self.selectedGroup = nil;
+        self.groups = self.currentUser[@"groups"];
+        NSLog(@"%@", [self.groups class]);
+        
+        if ([self.groups count] != 0) {
+            self.currentGroupName = [self.groups objectAtIndex:0];
+            
+            NSString *selectGroup = [self.currentGroupName stringByAppendingString:@"_Member"];
+            PFQuery *selectQuery = [PFQuery queryWithClassName:selectGroup];
+            [selectQuery whereKey:@"email" equalTo:self.currentEmail];
+            [selectQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+                if (!error) {
+                    self.selectedGroupUser = object;
+                    self.currentName = self.currentUser[@"name"];
+                    self.currentPhoneNumber = self.currentUser[@"phone"];
                 }
-                else
-                {
-                    self.group = YES;
-                    self.selectedGroup = [objects objectAtIndex:0];
-                }
+            }];
+        }
+        
 
-            }
-        }];
+//        self.currentUserName = self.currentUser[@"username"];
+//        NSString *getList = @"_GroupList";
+//        NSString *groupList = [self.currentUser[@"username"] stringByAppendingString:getList];
+        
+        
+//        self.currentQuery = [PFQuery queryWithClassName:groupList];
+//        [self.currentQuery whereKey:@"group" equalTo:@"group"];
+//        
+//        [self.currentQuery orderByDescending:@"updatedAt"];
+//
+//        
+//        [self.currentQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//
+//
+//            if (error)
+//            {
+//
+//                
+//                NSLog(@"error: %@", error);
+//            }
+//            else
+//            {
+//
+//                if ([objects count] == 1)
+//                {
+//                    self.group = NO;
+//                    self.selectedGroup = nil;
+//                }
+//                else
+//                {
+//                    self.group = YES;
+//                    self.selectedGroup = [objects objectAtIndex:0];
+//                }
+//
+//            }
+//        }];
         
     }
     else
     {
-        self.group = NO;
-        self.selectedGroup = nil;
+//        self.group = NO;
+//        self.selectedGroup = nil;
+    
+        
     }
     
     
-    
+    [Venmo startWithAppId:@"2220" secret:@"UaNkRnQg2tHtpbmFX6zsvsWjp9bRVPg7" name:@"GroupBowl"];
+
     
     return YES;
 }
@@ -99,6 +133,15 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [currentInstallation setDeviceTokenFromData:deviceToken];
     currentInstallation.channels = @[@"global"];
     [currentInstallation saveInBackground];
+}
+
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    if ([[Venmo sharedInstance] handleOpenURL:url]) {
+        return YES;
+    }
+    // You can add your app-specific url handling code here if needed
+    return NO;
 }
 
 - (void)application:(UIApplication *)application

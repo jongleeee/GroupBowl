@@ -52,17 +52,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     
-    self.currentUsername.text = self.currentUser[@"name"];
-    self.currentNumber.text = self.currentUser[@"phone"];
-    self.currentEmail = self.currentUser[@"email"];
-
-    
-    
-    self.imagePicker = [[UIImagePickerController alloc] init];
-    self.imagePicker.delegate = self;
-    self.imagePicker.allowsEditing = NO;
-    
-    self.image = [PFUser currentUser][@"file"];
     
 
 }
@@ -124,7 +113,7 @@
     
     [PFUser requestPasswordResetForEmailInBackground:self.currentUser[@"email"]];
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent!" message:@"please check your email" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent" message:@"please check your email" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
     [alertView show];
     
     [self.navigationController popToRootViewControllerAnimated:NO];

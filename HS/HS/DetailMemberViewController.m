@@ -31,25 +31,11 @@
 {
     [super viewWillAppear:animated];
     
-    PFQuery *query = [PFUser query];
-    [query whereKey:@"username" equalTo:self.user];
-    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-        if (error)
-        {
-            NSLog(@"error: %@", error);
-        }
-        else
-        {
-            self.phonenumber.text = object[@"phone"];
-            self.email.text = object[@"email"];
-            self.selectedUserName = object[@"name"];
-            self.username.text = self.selectedUserName;
-            self.detailuser = object;
-            self.selectedUserNAME = object[@"username"];
-            NSLog(@"%@", self.detailuser);
-        }
-    }];
-    NSLog(@"%@", self.detailuser);
+    
+    self.phonenumber.text = self.detailuser[@"phone"];
+    self.email.text = self.detailuser[@"email"];
+    self.username.text = self.detailuser[@"name"];
+
 
 }
 
@@ -123,7 +109,30 @@
 
 - (IBAction)editPressed:(id)sender {
     
+    if ([appDelegate.selectedGroupUser[@"title"] isEqualToString:@"Leader"]) {
+        [self performSegueWithIdentifier:@"editDetailMember" sender:self];
+    } else {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader!" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alerView show];
+    }
     
+    
+    
+//    NSString *title = appDelegate.currentUser[@"title"];
+//    
+//    if ([title isEqualToString:@"Leader"])
+//    {
+//        [self performSegueWithIdentifier:@"editDetailMember" sender:self];
+//
+//    }
+//    else
+//    {
+//        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//        [alerView show];
+//    }
+    
+    
+    /*
     appDelegate.currentGroupName = appDelegate.selectedGroup[@"name"];
     
     PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentGroupName];
@@ -149,7 +158,7 @@
             }
         }
     }];
-    
+    */
     
 }
 

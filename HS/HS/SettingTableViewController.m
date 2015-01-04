@@ -20,7 +20,8 @@
 {
     [super viewDidLoad];
 
-    
+    appDelegate = [[UIApplication sharedApplication] delegate];
+
    
 }
 
@@ -29,9 +30,19 @@
     
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
 
-    if ([cell.reuseIdentifier isEqualToString:@"editProfile"])
+    if ([cell.reuseIdentifier isEqualToString:@"password"])
     {
-        [self performSegueWithIdentifier:@"editProfilePressed" sender:self];
+        
+        [PFUser requestPasswordResetForEmailInBackground:appDelegate.currentEmail];
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent" message:@"please check your email" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    } else if ([cell.reuseIdentifier isEqualToString:@"phoneNumber"]) {
+        [self performSegueWithIdentifier:@"changePhoneNumber" sender:self];
+        
+    } else if ([cell.reuseIdentifier isEqualToString:@"name"]) {
+        [self performSegueWithIdentifier:@"changeName" sender:self];
     }
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
@@ -40,4 +51,14 @@
     
 }
 
+
+
+
+
+- (IBAction)signOut:(id)sender {
+
+    [PFUser logOut];
+    appDelegate.currentUser = nil;
+    self.tabBarController.selectedIndex = 0;
+}
 @end

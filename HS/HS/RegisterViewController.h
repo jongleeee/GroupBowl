@@ -19,6 +19,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *passwordConfirmField;
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UITextField *phoneNumber;
+@property (strong, nonatomic) NSURL *url;
+- (IBAction)privacyPolicy:(id)sender;
 
 
 

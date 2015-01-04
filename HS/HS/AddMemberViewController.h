@@ -20,4 +20,8 @@
 @property (strong, nonatomic) PFUser *addUser;
 - (IBAction)addPressed:(id)sender;
 
+
+@property (strong, nonatomic) NSString *currentMember;
+@property (strong, nonatomic) NSString *tempName;
+
 @end

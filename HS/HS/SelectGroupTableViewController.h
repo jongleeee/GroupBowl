@@ -14,7 +14,6 @@
     AppDelegate *appDelegate;
 }
 
-@property (nonatomic, strong) PFRelation *groupList;
 @property (nonatomic, strong) NSArray *groups;
 @property (nonatomic, strong) PFUser *currentUser;
 

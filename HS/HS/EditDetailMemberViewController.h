@@ -15,7 +15,6 @@
 }
 
 @property (nonatomic, strong) PFUser *detailUser;
-@property (strong, nonatomic) IBOutlet UILabel *detailUsername;
 @property (strong, nonatomic) IBOutlet UIPickerView *titleList;
 @property (nonatomic, strong) NSArray *titles;
 @property (nonatomic, readwrite) NSInteger titleComponent;

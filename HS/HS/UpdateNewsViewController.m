@@ -9,6 +9,7 @@
 #import "UpdateNewsViewController.h"
 #import "News.h"
 #import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface UpdateNewsViewController ()
 
@@ -34,6 +35,8 @@
     [self.view addGestureRecognizer:tap];
     
     self.titleField.delegate = self;
+    
+    NSLog(@"onethuotneub %@", self.currentAnnouncement);
     
 }
 
@@ -65,7 +68,41 @@
     }
     else
     {
+        [self dismissKeyboard];
         
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setDetailsLabelText:@"Updating..."];
+        [hud setDimBackground:YES];
+        
+        NSString *parse_title = [self.titleField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        NSString *parse_news = [self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        PFObject *announcement = [PFObject objectWithClassName:self.currentAnnouncement];
+        
+        announcement[@"title"] = parse_title;
+        announcement[@"news"] = parse_news;
+        [announcement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error)
+            {
+                NSLog(@"Error: %@", error);
+            }
+            else
+            {
+                
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
+                
+                // Send push notification to query
+                [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                               withMessage:@"Announcement made!"];
+
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        }];
+        
+        // GroupBowl
+        /*
         NSString *parse_title = [self.titleField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString *parse_news = [self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         
@@ -93,7 +130,8 @@
                                        withMessage:@"Announcement!"];
         
             [self.navigationController popToRootViewControllerAnimated:YES];
-
+*/
+        
     }
     
 }

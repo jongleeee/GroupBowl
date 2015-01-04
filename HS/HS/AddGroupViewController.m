@@ -96,7 +96,6 @@
         
     
             appDelegate.selectedGroup = createGroup;
-            appDelegate.group = YES;
 
     
             NSString *newFeed = @"_NewsFeed";

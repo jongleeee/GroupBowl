@@ -69,13 +69,13 @@
         }
         else
         {
-            // Create our Installation query
             PFQuery *pushQuery = [PFInstallation query];
             [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
             
             // Send push notification to query
             [PFPush sendPushMessageToQueryInBackground:pushQuery
                                            withMessage:@"Event has been fixed!"];
+
             
             [self.navigationController popToRootViewControllerAnimated:YES];
 

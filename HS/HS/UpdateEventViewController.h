@@ -17,6 +17,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *titleField;
 @property (strong, nonatomic) IBOutlet UITextView *contentsField;
 @property (strong, nonatomic) IBOutlet UIDatePicker *dateAndTime;
+@property (strong, nonatomic) PFObject *selectedEvent;
 
 - (IBAction)donePressed:(id)sender;
 

@@ -34,7 +34,29 @@
 
 - (IBAction)editPressed:(id)sender {
     
+    if ([appDelegate.selectedGroupUser[@"title"] isEqualToString:@"Leader"]) {
+        [self performSegueWithIdentifier:@"editDetailNewsFeed" sender:self];
+
+    } else {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader!" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alerView show];
+    }
     
+    
+//    NSString *title = [appDelegate.currentUser objectForKey:@"title"];
+//    if ([title isEqualToString:@"Leader"])
+//    {
+//        [self performSegueWithIdentifier:@"editDetailNewsFeed" sender:self];
+//    }
+//    else
+//    {
+//        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//        [alerView show];
+//        
+//    }
+    
+    // GroupBowl
+    /*
     appDelegate.currentGroupName = appDelegate.selectedGroup[@"name"];
     
     PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentGroupName];
@@ -60,6 +82,7 @@
             }
         }
     }];
+     */
     
 }
 

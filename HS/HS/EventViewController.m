@@ -19,6 +19,7 @@
 
 - (IBAction)addButtonPressed:(UIBarButtonItem *)sender;
 - (IBAction)calendarButtonPressed:(UIBarButtonItem *)sender;
+- (void)getLatestEvents;
 @property (nonatomic, weak) UIViewController *currentchildViewController;
 
 @end
@@ -47,6 +48,15 @@
     selectedIndex = -1;
     
     
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(getLatestEvents)
+                  forControlEvents:UIControlEventValueChanged];
+    
+    
 }
 
 
@@ -54,12 +64,32 @@
 {
     [super viewWillAppear:animated];
     
-    if (appDelegate.group == NO)
-    {
-        
+    if (appDelegate.currentGroupName) {
+        self.currentEvent = [appDelegate.currentGroupName stringByAppendingString:@"_Event"];
+        appDelegate.currentEvent = self.currentEvent;
     }
-    else
-    {
+    
+    
+   
+        
+//        PFQuery *query = [PFQuery queryWithClassName:@"Karisma_Event"];
+//        
+//        [query orderByAscending:@"date"];
+//
+//        
+//        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+//            if (error)
+//            {
+//                NSLog(@"Error: %@", error);
+//            }
+//            else
+//            {
+//                self.eventItems = objects;
+//                [self.tableView reloadData];
+//            }
+//        }];
+        
+        /*
         NSString *addEvent = @"_Event";
         NSString *currentEvent = [appDelegate.selectedGroup[@"name"] stringByAppendingString:addEvent];
         
@@ -79,12 +109,55 @@
                 [self.tableView reloadData];
             }
         }];
-    }
+         */
+    
     
    
     
 }
 
+
+    
+    
+- (void)getLatestEvents {
+    
+    PFQuery *query = [PFQuery queryWithClassName:self.currentEvent];
+    [query whereKey:@"date" greaterThanOrEqualTo:[NSDate date]];
+    [query orderByAscending:@"date"];
+    
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error)
+        {
+            NSLog(@"Error: %@", error);
+        }
+        else
+        {
+            self.eventItems = objects;
+            [self reloadData];
+        }
+    }];
+}
+
+- (void)reloadData {
+    // Reload table data
+    [self.tableView reloadData];
+    
+    // End the refreshing
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
+
+}
 
 
 #pragma mark - Table view data source
@@ -92,14 +165,39 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
+    
+    if ([self.eventItems count] == 0) {
+        // Display a message when the table is empty
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        if (!self.currentEvent) {
+            messageLabel.text = @"Please register for a group.";
+        } else {
+            messageLabel.text = @"No data is currently available. \n Please pull down to refresh.";
+        }
+        messageLabel.textColor = [UIColor grayColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:15];
+        [messageLabel sizeToFit];
+        
+        self.tableView.backgroundView = messageLabel;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return 0;
+    } else {
 
-    return 1;
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.tableView.backgroundView = nil;
+        return 1;
+        
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [self.eventItems count]-1;
+    return [self.eventItems count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -112,7 +210,7 @@
     
 //    Event *item = [self.eventItems objectAtIndex:indexPath.row];
     
-    PFObject *event = [self.eventItems objectAtIndex:indexPath.row+1];
+    PFObject *event = [self.eventItems objectAtIndex:indexPath.row];
     
 
     
@@ -123,7 +221,7 @@
     
     NSDateFormatter *dformat = [[NSDateFormatter alloc]init];
     
-    [dformat setDateFormat:@"EEE, MMM d"];
+    [dformat setDateFormat:@"EEE, MM/d"];
     
     NSString *dateString = [dformat stringFromDate:date];
     
@@ -201,25 +299,49 @@
 
     
     
-    self.selectedEvent = [self.eventItems objectAtIndex:indexPath.row+1];
+    self.selectedEvent = [self.eventItems objectAtIndex:indexPath.row];
+    
+
+        
     [self performSegueWithIdentifier:@"detailEvent" sender:self];
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+
 
     
 }
 
 
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //add code here to do what you want when you hit delete
+        [[self.eventItems objectAtIndex:indexPath.row] deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error)
+            {
+                NSLog(@"Error: %@", error);
+            }
+            else
+            {
+                [self.eventItems removeObjectAtIndex:[indexPath row]];
+                [tableView reloadData];
+                
+            }
+        }
+         
+         ];}
+}
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     
-    if (appDelegate.group == NO)
-    {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Must be in a group!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alertView show];
-        
-        return;
-    }
+//    if (appDelegate.groups == NO)
+//    {
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Must be in a group!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//        [alertView show];
+//        
+//        return;
+//    }
     
     if ([segue.identifier isEqualToString:@"detailEvent"])
     {
@@ -254,7 +376,8 @@
     
     //contained viewcontroller event tableview
     UITableViewController *viewController = [self calendarEventList];
-    viewController.view.frame = CGRectMake(self.view.frame.size.width - viewController.view.frame.size.width, self.view.frame.size.height - viewController.view.frame.size.height, viewController.view.frame.size.width, viewController.view.frame.size.height);
+//    viewController.view.frame = CGRectMake(self.view.frame.size.width - viewController.view.frame.size.width, self.view.frame.size.height - viewController.view.frame.size.height, viewController.view.frame.size.width, viewController.view.frame.size.height);
+    viewController.view.frame = CGRectMake(self.view.frame.size.width, self.view.frame.size.height, viewController.view.frame.size.width, viewController.view.frame.size.height);
     [calendar addChildViewController:viewController];
     [calendar.view addSubview:viewController.view];
     [viewController didMoveToParentViewController:calendar];
@@ -274,12 +397,41 @@
 }
 
 - (IBAction)navAdd:(UIBarButtonItem *)sender {
+    
+    if (!self.currentEvent) {
+        return;
+    }
+    
     [self performSegueWithIdentifier:@"addEvent" sender:sender];
 }
 
 
 - (IBAction)addPressed:(id)sender {
 
+    if (!self.currentEvent) {
+        return;
+    }
+    
+    if ([appDelegate.selectedGroupUser[@"title"] isEqualToString:@"Leader"]) {
+        [self performSegueWithIdentifier:@"addEvent" sender:self];
+    } else {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader!" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alerView show];
+    }
+    
+    
+//    NSString *userTitle = [appDelegate.currentUser objectForKey:@"title"];
+//    if ([userTitle isEqualToString:@"Leader"])
+//    {
+//        [self performSegueWithIdentifier:@"addEvent" sender:self];
+//    }
+//    else
+//    {
+//        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader!" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+//        [alerView show];
+//    }
+    
+    /*
     appDelegate.currentGroupName = appDelegate.selectedGroup[@"name"];
         PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentGroupName];
     NSLog(@"%@", appDelegate.currentGroupName);
@@ -306,7 +458,7 @@
             }
         }];
         
-    
+    */
        
     
 }

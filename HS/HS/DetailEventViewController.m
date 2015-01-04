@@ -8,6 +8,8 @@
 
 #import "DetailEventViewController.h"
 #import "EditDetailEventViewController.h"
+#import "AttendingListTableViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface DetailEventViewController ()
 
@@ -16,15 +18,24 @@
 @implementation DetailEventViewController
 
 
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     appDelegate = [[UIApplication sharedApplication] delegate];
 
+    self.attendListView = [[AttendingListTableView alloc] init];
     
+    [self.attendList addSubview:self.attendListView];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    
+    [self.attendList addSubview:self.refreshControl];
 
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -46,10 +57,118 @@
 }
 
 
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    
+    
+    PFRelation *relation = [self.detailEvent objectForKey:@"attend"];
+
+    PFQuery *query = [relation query];
+
+    [query orderByAscending:@"name"];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        else
+        {
+            self.attendingList = objects;
+            [self reload];
+        }
+    }];
+    
+    
+}
+
+
+- (void)reload {
+    
+    // End the refreshing
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
+    
+    [self.attendList reloadData];
+    
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    
+    if ([self.attendingList count] == 0) {
+        // Display a message when the table is empty
+        UILabel *messageLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height)];
+        
+        messageLabel.text = @"No data is currently available. \n Please pull down to refresh.";
+        messageLabel.textColor = [UIColor grayColor];
+        messageLabel.numberOfLines = 0;
+        messageLabel.textAlignment = NSTextAlignmentCenter;
+        messageLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:15];
+        [messageLabel sizeToFit];
+        
+        self.attendList.backgroundView = messageLabel;
+        self.attendList.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        return 0;
+    } else {
+        
+        self.attendList.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+        self.attendList.backgroundView = nil;
+        return 1;
+        
+    }
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // Return the number of rows in the section.
+    return [self.attendingList count];
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    PFObject *user = [self.attendingList objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = user[@"name"];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+}
 
 
 - (IBAction)editPressed:(id)sender {
     
+    
+    NSString *userTitle = [appDelegate.currentUser objectForKey:@"title"];
+    if ([userTitle isEqualToString:@"Leader"])
+    {
+        [self performSegueWithIdentifier:@"editDetailEvent" sender:self];
+    }
+    else
+    {
+        UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Sorry, must be a leader!" delegate:self cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alerView show];
+    }
+    
+    /*
     appDelegate.currentGroupName = appDelegate.selectedGroup[@"name"];
     
     PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentGroupName];
@@ -75,9 +194,62 @@
             }
         }
     }];
+    */
+    
+}
+
+
+
+- (IBAction)attendPressed:(id)sender {
+    
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setDimBackground:YES];
+    
+    if ([self.detailEvent[@"payment"] isEqualToString:@"YES"]) {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+        
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Venmo coming..." message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        
+    } else {
+        
+        PFRelation *attending = [self.detailEvent relationForKey:@"attend"];
+        
+        [attending addObject:appDelegate.currentUser];
+        
+        
+        [self.detailEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error)
+            {
+                
+            }
+            else
+            {
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+                
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Attending" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                [alertView show];
+                
+                
+            }
+        }];
+
+        
+    }
     
     
 }
+
+- (IBAction)attendingListPressed:(id)sender {
+    
+    [self performSegueWithIdentifier:@"attendingList" sender:self];
+}
+
+
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -86,5 +258,29 @@
         EditDetailEventViewController *viewController = (EditDetailEventViewController *)segue.destinationViewController;
         viewController.detailEvent = self.detailEvent;
     }
+    else if ([segue.identifier isEqualToString:@"attendingList"])
+    {
+        AttendingListTableViewController *viewController = (AttendingListTableViewController *)segue.destinationViewController;
+        viewController.event = self.detailEvent;
+    }
 }
+
+
+- (IBAction)segmentValueChanged:(UISegmentedControl *)sender {
+    
+    switch (sender.selectedSegmentIndex) {
+        case 0:
+            self.eventDetail.hidden = NO;
+            self.attendList.hidden = YES;
+            break;
+        case 1:
+            self.eventDetail.hidden = YES;
+            self.attendList.hidden = NO;
+            break;
+        default:
+            break;
+    }
+}
+
+
 @end

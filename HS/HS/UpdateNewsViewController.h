@@ -16,6 +16,7 @@
 
 @property (strong, nonatomic) IBOutlet UITextView *textField;
 @property (strong, nonatomic) IBOutlet UITextField *titleField;
+@property (strong, nonatomic) NSString *currentAnnouncement;
 
 - (IBAction)updatePressed:(id)sender;
 - (IBAction)cancelPressed:(id)sender;

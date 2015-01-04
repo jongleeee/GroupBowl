@@ -8,6 +8,8 @@
 
 #import <QuartzCore/QuartzCore.h>
 #import "UpdateEventViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
 
 @interface UpdateEventViewController ()
 
@@ -49,7 +51,57 @@
 
 - (IBAction)donePressed:(id)sender {
     
+    if ([self.titleField.text length] == 0 || [self.contentsField.text length] == 0)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Please fill out title and contents!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+        
+        [alertView show];
+    } else
+    {
     
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setDetailsLabelText:@"Updating..."];
+        [hud setDimBackground:YES];
+        
+        NSString *parse_title = [self.titleField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString *parse_contents = [self.contentsField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSDate *parse_date = self.dateAndTime.date;
+        
+
+        
+        PFObject *event = [PFObject objectWithClassName:@"Karisma_Event"];
+        event[@"title"] = parse_title;
+        event[@"contents"] = parse_contents;
+        event[@"date"] = parse_date;
+            NSLog(@"ERROR HERE");
+        [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            NSLog(@"HI");
+            if (error)
+            {
+                NSLog(@"Error: %@", error);
+            }
+            else
+            {
+                PFQuery *pushQuery = [PFInstallation query];
+                [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
+                
+                // Send push notification to query
+                [PFPush sendPushMessageToQueryInBackground:pushQuery
+                                               withMessage:@"New event!"];
+
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        }];
+    
+
+    
+    //GroupBowl
+    
+    /*
     if ([self.titleField.text length] == 0 || [self.contentsField.text length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Please fill out title and contents!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
@@ -95,6 +147,7 @@
         
         
     }
-
+     */
+    }
 }
 @end

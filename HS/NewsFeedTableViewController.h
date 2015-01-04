@@ -17,8 +17,9 @@
 }
 
 - (IBAction)updateNewsFeed:(id)sender;
-@property (strong, nonatomic) NSArray *newsList;
+@property (strong, nonatomic) NSMutableArray *newsList;
 @property (strong, nonatomic) PFObject *selectedNews;
 @property (strong, nonatomic) PFUser *currentUser;
+@property (strong, nonatomic) NSString *currentAnnouncement;
 
 @end

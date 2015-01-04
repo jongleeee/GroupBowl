@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface LoginViewController ()
 
@@ -21,15 +22,26 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.navigationItem.hidesBackButton = YES;
+    
     appDelegate = [[UIApplication sharedApplication] delegate];
     
     [self.emailField setDelegate:self];
     
     [self.passwordField setDelegate:self];
+    
+    
 
-    self.navigationItem.hidesBackButton = YES;
+
 }
 
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -56,13 +68,32 @@
     else
     {
         
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setDetailsLabelText:@"Signing in..."];
+        [hud setDimBackground:YES];
+        
+        
         [PFUser logInWithUsernameInBackground:parse_emailField password:parse_passwordField
                                         block:^(PFUser *user, NSError *error) {
+                                            
+                                            appDelegate.groups = user[@"groups"];
+                                            appDelegate.currentEmail = user[@"email"];
+                                            appDelegate.currentName = user[@"name"];
+                                            appDelegate.currentPhoneNumber = user[@"phone"];
+                                            
+                                            
+                                            
                                             if (error) {
                                                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Oops!" message:@"Incorrect email or password!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                                                 [alert show];
                                             } else {
+                                                
                                                 appDelegate.currentUser = user;
+
+                                                [self getGroupIfAny:user];
+                                                
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                                                
                                                 [self.navigationController popToRootViewControllerAnimated:NO];
                                             }
                                         }];
@@ -73,4 +104,30 @@
     
     
 }
+
+
+- (void)getGroupIfAny: (id)user {
+    
+    NSArray *tempGroup = user[@"groups"];
+    if ([tempGroup count] != 0) {
+        
+        appDelegate.currentGroupName = [tempGroup objectAtIndex:0];
+        
+        NSString *selectGroup = [appDelegate.currentGroupName stringByAppendingString:@"_Member"];
+        
+        PFQuery *selectQuery = [PFQuery queryWithClassName:selectGroup];
+        [selectQuery whereKey:@"email" equalTo:appDelegate.currentEmail];
+        [selectQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if (!error) {
+                appDelegate.selectedGroupUser = object;
+                appDelegate.currentName = object[@"name"];
+                appDelegate.currentPhoneNumber = object[@"phone"];
+                }
+        }];
+    }
+
+    
+    
+}
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import "EditDetailNewsViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface EditDetailNewsViewController ()
 
@@ -53,6 +54,11 @@
 
 - (IBAction)updatePressed:(id)sender {
     
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setDetailsLabelText:@"Updating..."];
+    [hud setDimBackground:YES];
+    
+    
     self.editNewsFeed[@"title"] = self.detailTitle.text;
     self.editNewsFeed[@"news"] = self.contents.text;
     
@@ -71,6 +77,8 @@
             // Send push notification to query
             [PFPush sendPushMessageToQueryInBackground:pushQuery
                                            withMessage:@"Announcement has been fixed!"];
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             
             [self.navigationController popToRootViewControllerAnimated:YES];
 

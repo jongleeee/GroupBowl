@@ -8,6 +8,7 @@
 
 #import "RegisterViewController.h"
 #import <Parse/Parse.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface RegisterViewController ()
 
@@ -32,8 +33,33 @@
     
     [self.passwordField setDelegate:self];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+
+
+
+    
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+}
+
+
+-(void)dismissKeyboard {
+    [self.usernameField resignFirstResponder];
+    [self.emailField resignFirstResponder];
+    [self.passwordConfirmField resignFirstResponder];
+    [self.phoneNumber resignFirstResponder];
+    [self.passwordField resignFirstResponder];
+    [self.nameField resignFirstResponder];
+}
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
@@ -51,6 +77,12 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)privacyPolicy:(id)sender {
+    
+    [self performSegueWithIdentifier:@"privacyPolicy" sender:self];
+    
+}
 
 - (IBAction)signupPressed:(id)sender {
     
@@ -84,6 +116,12 @@
     }
     else
     {
+        [self dismissKeyboard];
+        
+        MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [hud setDetailsLabelText:@"Signing in..."];
+        [hud setDimBackground:YES];
+        
         PFUser *user = [PFUser user];
         user.username = parse_usernameField;
         user.password = parse_passwordField;
@@ -108,7 +146,20 @@
             }
             else
             {
+                appDelegate.currentUser = user;
                 
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to GroupBowl" message:@"Thanks" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                
+                [alertView show];
+
+                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+                
+                // GroupBowl
+                /*
                 appDelegate.currentUser = user;
                 NSLog(@"this user reigstered: %@", appDelegate.currentUser);
                 
@@ -125,6 +176,7 @@
                         [self.navigationController popToRootViewControllerAnimated:YES];
                     }
                 }   ];
+                 */
             }
         }];
         

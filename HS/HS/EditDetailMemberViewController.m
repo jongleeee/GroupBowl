@@ -7,6 +7,8 @@
 //
 
 #import "EditDetailMemberViewController.h"
+#import <MBProgressHUD/MBProgressHUD.h>
+
 
 @interface EditDetailMemberViewController ()
 
@@ -32,7 +34,6 @@
 {
     [super viewWillAppear:animated];
     
-    self.detailUsername.text = self.userName;
 }
 
 
@@ -63,6 +64,10 @@
 
 - (IBAction)updatePressed:(id)sender {
     
+    MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [hud setDetailsLabelText:@"Updating..."];
+    [hud setDimBackground:YES];
+    
     NSString *changeTitle = @"title";
 
     
@@ -83,6 +88,7 @@
             {
                 object[@"title"] = @"Leader";
             }
+
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (error)
                 {
@@ -90,8 +96,11 @@
                 }
                 else
                 {
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                    
                     UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Title Updated!" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                     [alerView show];
+                    
                     [self.navigationController popToRootViewControllerAnimated:YES];
                 }
             }];

@@ -25,4 +25,8 @@
 @property (nonatomic, strong) NSString *currentName;
 - (IBAction)addPressed:(id)sender;
 
+
+
+@property (nonatomic, strong) NSString *currentMember;
+
 @end

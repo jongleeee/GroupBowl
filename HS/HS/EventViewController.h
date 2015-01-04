@@ -15,7 +15,7 @@
     NSInteger selectedIndex;
 }
 
-@property NSArray *eventItems;
+@property NSMutableArray *eventItems;
 @property PFObject *selectedEvent;
 @property (strong, nonatomic) IBOutlet UILabel *eventTitle;
 @property (strong, nonatomic) IBOutlet UILabel *eventDate;
@@ -23,5 +23,6 @@
 
 
 @property (nonatomic, strong) NSMutableArray *selectedIndexPaths;
+@property (nonatomic, strong) NSString *currentEvent;
 
 @end

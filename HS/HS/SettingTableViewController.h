@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import "AppDelegate.h"
 
-@interface SettingTableViewController : UITableViewController
+@interface SettingTableViewController : UITableViewController {
+    AppDelegate *appDelegate;
+}
 
+- (IBAction)signOut:(id)sender;
 
 @end

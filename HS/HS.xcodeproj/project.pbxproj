@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2C8046798F5BC68BF2B3289 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 261413FBA5C1B813FAC153EF /* libPods.a */; };
 		CB075AC419789A6200ABFE20 /* News.m in Sources */ = {isa = PBXBuildFile; fileRef = CB075AC319789A6200ABFE20 /* News.m */; };
 		CB075AC719789AB200ABFE20 /* UpdateNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB075AC619789AB200ABFE20 /* UpdateNewsViewController.m */; };
 		CB075ACA19789BD400ABFE20 /* NewsFeedTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB075AC919789BD400ABFE20 /* NewsFeedTableViewController.m */; };
@@ -40,8 +41,14 @@
 		FF1375ED19BB091900C1B04D /* EditDetailNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1375EC19BB091900C1B04D /* EditDetailNewsViewController.m */; };
 		FF1375F019BB0E2300C1B04D /* EditDetailEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1375EF19BB0E2300C1B04D /* EditDetailEventViewController.m */; };
 		FF1375F319BB12D500C1B04D /* CustomCellTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF1375F219BB12D500C1B04D /* CustomCellTableViewCell.m */; };
+		FF2D44B61A519F9000FC0F16 /* ChangeNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44B51A519F9000FC0F16 /* ChangeNameViewController.m */; };
+		FF2D44B91A519FB100FC0F16 /* ChangePhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44B81A519FB100FC0F16 /* ChangePhoneNumberViewController.m */; };
+		FF2D44BD1A51F8E000FC0F16 /* EventOptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44BC1A51F8E000FC0F16 /* EventOptionViewController.m */; };
+		FF2D44C01A51FD0600FC0F16 /* AddPaymentEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44BF1A51FD0600FC0F16 /* AddPaymentEventViewController.m */; };
+		FF2D44C31A52EEF600FC0F16 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44C21A52EEF600FC0F16 /* SignInViewController.m */; };
+		FF2D44C51A52F40C00FC0F16 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF2D44C41A52F40C00FC0F16 /* Main.storyboard */; };
+		FF2D44C81A533C6600FC0F16 /* AttendingListTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF2D44C71A533C6600FC0F16 /* AttendingListTableView.m */; };
 		FF3282FD19B6D5AF00DBDEC7 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF3282FC19B6D5AF00DBDEC7 /* Parse.framework */; };
-		FF32830E19B6D8F900DBDEC7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF32830C19B6D8F900DBDEC7 /* Main.storyboard */; };
 		FF32837719B6DB8C00DBDEC7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF32837619B6DB8C00DBDEC7 /* RegisterViewController.m */; };
 		FF48DF1519BA3607005E349D /* DetailEventViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF48DF1419BA3607005E349D /* DetailEventViewController.m */; };
 		FF5BD2DF19BBA00B00D45BFE /* EditDetailMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5BD2DE19BBA00A00D45BFE /* EditDetailMemberViewController.m */; };
@@ -58,12 +65,14 @@
 		FF69D82219B03CC200743508 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF69D82119B03CC200743508 /* Security.framework */; };
 		FF69D82419B03CC900743508 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF69D82319B03CC900743508 /* StoreKit.framework */; };
 		FF69D82619B03CD100743508 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF69D82519B03CD100743508 /* SystemConfiguration.framework */; };
+		FF8C602819DB10A30065AF26 /* PrivacyPolicyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FF8C602719DB10A30065AF26 /* PrivacyPolicyViewController.m */; };
 		FFBC1AD719BF0BAB00B8E7BE /* announcementTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBC1AD619BF0BAB00B8E7BE /* announcementTableViewController.m */; };
 		FFE99C0319B99C9800370D08 /* DetailMemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE99C0219B99C9800370D08 /* DetailMemberViewController.m */; };
 		FFE99C0619B9B5B900370D08 /* DetailNewsFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE99C0519B9B5B900370D08 /* DetailNewsFeedViewController.m */; };
 		FFE99C0919B9C74A00370D08 /* EventTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE99C0819B9C74A00370D08 /* EventTableViewController.m */; };
 		FFE99C0B19B9CCD100370D08 /* HS_Group_App_Development_Profile.mobileprovision in Resources */ = {isa = PBXBuildFile; fileRef = FFE99C0A19B9CCD100370D08 /* HS_Group_App_Development_Profile.mobileprovision */; };
 		FFE99C0D19B9CCE800370D08 /* aps_production.cer in Resources */ = {isa = PBXBuildFile; fileRef = FFE99C0C19B9CCE800370D08 /* aps_production.cer */; };
+		FFEC4BE919D9EDF700AD29F2 /* AttendingListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FFEC4BE819D9EDF700AD29F2 /* AttendingListTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,12 +86,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		10A00C764505AE6559FDB172 /* Pods.distribution.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.distribution.xcconfig; path = "Pods/Target Support Files/Pods/Pods.distribution.xcconfig"; sourceTree = "<group>"; };
+		261413FBA5C1B813FAC153EF /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		810951568E54E9BF3FE05E3F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CB075AC219789A6200ABFE20 /* News.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = News.h; sourceTree = "<group>"; };
 		CB075AC319789A6200ABFE20 /* News.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = News.m; sourceTree = "<group>"; };
 		CB075AC519789AB200ABFE20 /* UpdateNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateNewsViewController.h; sourceTree = "<group>"; };
 		CB075AC619789AB200ABFE20 /* UpdateNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateNewsViewController.m; sourceTree = "<group>"; };
 		CB075AC819789BD400ABFE20 /* NewsFeedTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NewsFeedTableViewController.h; path = ../NewsFeedTableViewController.h; sourceTree = "<group>"; };
 		CB075AC919789BD400ABFE20 /* NewsFeedTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NewsFeedTableViewController.m; path = ../NewsFeedTableViewController.m; sourceTree = "<group>"; };
+		CB12F46DDC8BD45A4580D516 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		CB41E3A4197D961300929329 /* UpdateEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateEventViewController.h; sourceTree = "<group>"; };
 		CB41E3A5197D961300929329 /* UpdateEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateEventViewController.m; sourceTree = "<group>"; };
 		CB41E3A7197D97E000929329 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
@@ -142,8 +155,21 @@
 		FF1375EF19BB0E2300C1B04D /* EditDetailEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailEventViewController.m; sourceTree = "<group>"; };
 		FF1375F119BB12D500C1B04D /* CustomCellTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomCellTableViewCell.h; sourceTree = "<group>"; };
 		FF1375F219BB12D500C1B04D /* CustomCellTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomCellTableViewCell.m; sourceTree = "<group>"; };
+		FF2D44B41A519F9000FC0F16 /* ChangeNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNameViewController.h; sourceTree = "<group>"; };
+		FF2D44B51A519F9000FC0F16 /* ChangeNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNameViewController.m; sourceTree = "<group>"; };
+		FF2D44B71A519FB100FC0F16 /* ChangePhoneNumberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangePhoneNumberViewController.h; sourceTree = "<group>"; };
+		FF2D44B81A519FB100FC0F16 /* ChangePhoneNumberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangePhoneNumberViewController.m; sourceTree = "<group>"; };
+		FF2D44BA1A51DFC100FC0F16 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		FF2D44BB1A51F8E000FC0F16 /* EventOptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventOptionViewController.h; sourceTree = "<group>"; };
+		FF2D44BC1A51F8E000FC0F16 /* EventOptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventOptionViewController.m; sourceTree = "<group>"; };
+		FF2D44BE1A51FD0600FC0F16 /* AddPaymentEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddPaymentEventViewController.h; sourceTree = "<group>"; };
+		FF2D44BF1A51FD0600FC0F16 /* AddPaymentEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddPaymentEventViewController.m; sourceTree = "<group>"; };
+		FF2D44C11A52EEF600FC0F16 /* SignInViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignInViewController.h; sourceTree = "<group>"; };
+		FF2D44C21A52EEF600FC0F16 /* SignInViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignInViewController.m; sourceTree = "<group>"; };
+		FF2D44C41A52F40C00FC0F16 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FF2D44C61A533C6600FC0F16 /* AttendingListTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendingListTableView.h; sourceTree = "<group>"; };
+		FF2D44C71A533C6600FC0F16 /* AttendingListTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendingListTableView.m; sourceTree = "<group>"; };
 		FF3282FC19B6D5AF00DBDEC7 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = ../Parse.framework; sourceTree = "<group>"; };
-		FF32830D19B6D8F900DBDEC7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = HS/Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		FF32837519B6DB8C00DBDEC7 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		FF32837619B6DB8C00DBDEC7 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		FF48DF1319BA3607005E349D /* DetailEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEventViewController.h; sourceTree = "<group>"; };
@@ -167,6 +193,8 @@
 		FF69D82119B03CC200743508 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FF69D82319B03CC900743508 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		FF69D82519B03CD100743508 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FF8C602619DB10A30065AF26 /* PrivacyPolicyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrivacyPolicyViewController.h; sourceTree = "<group>"; };
+		FF8C602719DB10A30065AF26 /* PrivacyPolicyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PrivacyPolicyViewController.m; sourceTree = "<group>"; };
 		FFBC1AD519BF0BAB00B8E7BE /* announcementTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = announcementTableViewController.h; sourceTree = "<group>"; };
 		FFBC1AD619BF0BAB00B8E7BE /* announcementTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = announcementTableViewController.m; sourceTree = "<group>"; };
 		FFE99C0119B99C9800370D08 /* DetailMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailMemberViewController.h; sourceTree = "<group>"; };
@@ -177,6 +205,8 @@
 		FFE99C0819B9C74A00370D08 /* EventTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventTableViewController.m; sourceTree = "<group>"; };
 		FFE99C0A19B9CCD100370D08 /* HS_Group_App_Development_Profile.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; path = HS_Group_App_Development_Profile.mobileprovision; sourceTree = SOURCE_ROOT; };
 		FFE99C0C19B9CCE800370D08 /* aps_production.cer */ = {isa = PBXFileReference; lastKnownFileType = file; name = aps_production.cer; path = ../aps_production.cer; sourceTree = "<group>"; };
+		FFEC4BE719D9EDF700AD29F2 /* AttendingListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttendingListTableViewController.h; sourceTree = "<group>"; };
+		FFEC4BE819D9EDF700AD29F2 /* AttendingListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttendingListTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +227,7 @@
 				FF69D81819B03C9700743508 /* AudioToolbox.framework in Frameworks */,
 				CB8C722D196FB251006E4CF2 /* UIKit.framework in Frameworks */,
 				CB8C7229196FB251006E4CF2 /* Foundation.framework in Frameworks */,
+				B2C8046798F5BC68BF2B3289 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,9 +244,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9DFBDC80EBE3B46C8334B2C0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				810951568E54E9BF3FE05E3F /* Pods.debug.xcconfig */,
+				CB12F46DDC8BD45A4580D516 /* Pods.release.xcconfig */,
+				10A00C764505AE6559FDB172 /* Pods.distribution.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		CB8C721C196FB251006E4CF2 = {
 			isa = PBXGroup;
 			children = (
+				FF2D44BA1A51DFC100FC0F16 /* Podfile */,
 				FF5BD2F619BD7D1C00D45BFE /* GroupBowl.mobileprovision */,
 				FF3282FC19B6D5AF00DBDEC7 /* Parse.framework */,
 				CBB8D01E1979ADDD0080F2B5 /* ImportedFiles */,
@@ -224,6 +266,7 @@
 				CBF3EE2D1970442400232601 /* Source */,
 				CB8C7227196FB251006E4CF2 /* Frameworks */,
 				CB8C7226196FB251006E4CF2 /* Products */,
+				9DFBDC80EBE3B46C8334B2C0 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,6 +297,7 @@
 				CB8C722A196FB251006E4CF2 /* CoreGraphics.framework */,
 				CB8C722C196FB251006E4CF2 /* UIKit.framework */,
 				CB8C724A196FB251006E4CF2 /* XCTest.framework */,
+				261413FBA5C1B813FAC153EF /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -264,15 +308,19 @@
 				FF69D80A19B031FD00743508 /* image */,
 				CBF8877F1990D55C003C146A /* EventCell */,
 				CBB4683C196FC0640061B757 /* Models */,
-				FF32830C19B6D8F900DBDEC7 /* Main.storyboard */,
+				FF2D44C41A52F40C00FC0F16 /* Main.storyboard */,
 				FFBC1AD519BF0BAB00B8E7BE /* announcementTableViewController.h */,
 				FFBC1AD619BF0BAB00B8E7BE /* announcementTableViewController.m */,
 				FF32837519B6DB8C00DBDEC7 /* RegisterViewController.h */,
 				FF32837619B6DB8C00DBDEC7 /* RegisterViewController.m */,
+				FF8C602619DB10A30065AF26 /* PrivacyPolicyViewController.h */,
+				FF8C602719DB10A30065AF26 /* PrivacyPolicyViewController.m */,
 				CB8C7237196FB251006E4CF2 /* AppDelegate.h */,
 				CB8C7238196FB251006E4CF2 /* AppDelegate.m */,
 				CB41E3AD197F842A00929329 /* LoginViewController.h */,
 				CB41E3AE197F842A00929329 /* LoginViewController.m */,
+				FF2D44C11A52EEF600FC0F16 /* SignInViewController.h */,
+				FF2D44C21A52EEF600FC0F16 /* SignInViewController.m */,
 				FFDBFFA319BEDC5900FC8AD2 /* NewsFeed */,
 				FFDBFFA419BEDC6100FC8AD2 /* Events */,
 				FFDBFFA519BEDC6D00FC8AD2 /* Members */,
@@ -416,6 +464,8 @@
 			children = (
 				CB48A25B197CF1E200E458AA /* EventViewController.h */,
 				CB48A25C197CF1E200E458AA /* EventViewController.m */,
+				FFEC4BE719D9EDF700AD29F2 /* AttendingListTableViewController.h */,
+				FFEC4BE819D9EDF700AD29F2 /* AttendingListTableViewController.m */,
 				FF1375EE19BB0E2300C1B04D /* EditDetailEventViewController.h */,
 				FF1375EF19BB0E2300C1B04D /* EditDetailEventViewController.m */,
 				FF48DF1319BA3607005E349D /* DetailEventViewController.h */,
@@ -426,6 +476,12 @@
 				FF1375F219BB12D500C1B04D /* CustomCellTableViewCell.m */,
 				FFE99C0719B9C74A00370D08 /* EventTableViewController.h */,
 				FFE99C0819B9C74A00370D08 /* EventTableViewController.m */,
+				FF2D44BB1A51F8E000FC0F16 /* EventOptionViewController.h */,
+				FF2D44BC1A51F8E000FC0F16 /* EventOptionViewController.m */,
+				FF2D44BE1A51FD0600FC0F16 /* AddPaymentEventViewController.h */,
+				FF2D44BF1A51FD0600FC0F16 /* AddPaymentEventViewController.m */,
+				FF2D44C61A533C6600FC0F16 /* AttendingListTableView.h */,
+				FF2D44C71A533C6600FC0F16 /* AttendingListTableView.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -452,6 +508,10 @@
 				CB41E3B4197F8FAF00929329 /* SettingTableViewController.m */,
 				CBF8877A1990C32D003C146A /* EditProfileViewController.h */,
 				CBF8877B1990C32D003C146A /* EditProfileViewController.m */,
+				FF2D44B71A519FB100FC0F16 /* ChangePhoneNumberViewController.h */,
+				FF2D44B81A519FB100FC0F16 /* ChangePhoneNumberViewController.m */,
+				FF2D44B41A519F9000FC0F16 /* ChangeNameViewController.h */,
+				FF2D44B51A519F9000FC0F16 /* ChangeNameViewController.m */,
 			);
 			name = Setting;
 			sourceTree = "<group>";
@@ -463,9 +523,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CB8C725A196FB251006E4CF2 /* Build configuration list for PBXNativeTarget "HS" */;
 			buildPhases = (
+				A4D8B6FE6402A18BFD27A3F2 /* Check Pods Manifest.lock */,
 				CB8C7221196FB251006E4CF2 /* Sources */,
 				CB8C7222196FB251006E4CF2 /* Frameworks */,
 				CB8C7223196FB251006E4CF2 /* Resources */,
+				4C6832D66F7A3E55D0A99C7C /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -503,6 +565,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = HeapStack;
 				TargetAttributes = {
+					CB8C7224196FB251006E4CF2 = {
+						DevelopmentTeam = 4S8HQ943US;
+					};
 					CB8C7248196FB251006E4CF2 = {
 						TestTargetID = CB8C7224196FB251006E4CF2;
 					};
@@ -532,11 +597,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2D44C51A52F40C00FC0F16 /* Main.storyboard in Resources */,
 				CB8C7244196FB251006E4CF2 /* Images.xcassets in Resources */,
 				FFE99C0D19B9CCE800370D08 /* aps_production.cer in Resources */,
 				FFE99C0B19B9CCD100370D08 /* HS_Group_App_Development_Profile.mobileprovision in Resources */,
 				CB8C7233196FB251006E4CF2 /* InfoPlist.strings in Resources */,
-				FF32830E19B6D8F900DBDEC7 /* Main.storyboard in Resources */,
 				FF5BD2F719BD7D1C00D45BFE /* GroupBowl.mobileprovision in Resources */,
 				CBF8877E1990D521003C146A /* EventCell.xib in Resources */,
 			);
@@ -552,22 +617,59 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4C6832D66F7A3E55D0A99C7C /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A4D8B6FE6402A18BFD27A3F2 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CB8C7221196FB251006E4CF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF2D44C81A533C6600FC0F16 /* AttendingListTableView.m in Sources */,
 				FF5BD2EB19BBCE8200D45BFE /* AddMemberViewController.m in Sources */,
 				CB41E3E5198794C500929329 /* PDTSimpleCalendarViewHeader.m in Sources */,
 				CB075AC719789AB200ABFE20 /* UpdateNewsViewController.m in Sources */,
 				CB41E3A6197D961300929329 /* UpdateEventViewController.m in Sources */,
+				FF2D44C31A52EEF600FC0F16 /* SignInViewController.m in Sources */,
 				FFE99C0619B9B5B900370D08 /* DetailNewsFeedViewController.m in Sources */,
+				FF8C602819DB10A30065AF26 /* PrivacyPolicyViewController.m in Sources */,
 				FF32837719B6DB8C00DBDEC7 /* RegisterViewController.m in Sources */,
 				FF1375F319BB12D500C1B04D /* CustomCellTableViewCell.m in Sources */,
 				FFE99C0919B9C74A00370D08 /* EventTableViewController.m in Sources */,
 				FF5BD2E819BBB55B00D45BFE /* AddGroupViewController.m in Sources */,
 				FF61966619B58B1700743E1E /* MemberTableViewController.m in Sources */,
 				FFBC1AD719BF0BAB00B8E7BE /* announcementTableViewController.m in Sources */,
+				FF2D44B91A519FB100FC0F16 /* ChangePhoneNumberViewController.m in Sources */,
 				CB41E3B5197F8FAF00929329 /* SettingTableViewController.m in Sources */,
 				CB41E3A9197D97E000929329 /* Event.m in Sources */,
 				CB48A25D197CF1E200E458AA /* EventViewController.m in Sources */,
@@ -576,16 +678,20 @@
 				CB8C7239196FB251006E4CF2 /* AppDelegate.m in Sources */,
 				CB41E3AF197F842A00929329 /* LoginViewController.m in Sources */,
 				FF48DF1519BA3607005E349D /* DetailEventViewController.m in Sources */,
+				FF2D44BD1A51F8E000FC0F16 /* EventOptionViewController.m in Sources */,
 				CB41E3E4198794C500929329 /* PDTSimpleCalendarViewFlowLayout.m in Sources */,
 				CB075ACA19789BD400ABFE20 /* NewsFeedTableViewController.m in Sources */,
 				FF5BD2E519BBB31300D45BFE /* SelectGroupTableViewController.m in Sources */,
 				FFE99C0319B99C9800370D08 /* DetailMemberViewController.m in Sources */,
 				CBF887821990D584003C146A /* EventCell.m in Sources */,
 				CB8C7262196FB51E006E4CF2 /* ChatViewController.m in Sources */,
+				FFEC4BE919D9EDF700AD29F2 /* AttendingListTableViewController.m in Sources */,
 				CBDDED54199358AD00660639 /* CalendarEventView.m in Sources */,
 				FF5BD2DF19BBA00B00D45BFE /* EditDetailMemberViewController.m in Sources */,
 				FF1375ED19BB091900C1B04D /* EditDetailNewsViewController.m in Sources */,
 				CBF8877C1990C32D003C146A /* EditProfileViewController.m in Sources */,
+				FF2D44B61A519F9000FC0F16 /* ChangeNameViewController.m in Sources */,
+				FF2D44C01A51FD0600FC0F16 /* AddPaymentEventViewController.m in Sources */,
 				CB075AC419789A6200ABFE20 /* News.m in Sources */,
 				FF1375F019BB0E2300C1B04D /* EditDetailEventViewController.m in Sources */,
 				CB8C7235196FB251006E4CF2 /* main.m in Sources */,
@@ -625,15 +731,6 @@
 				CB8C7254196FB251006E4CF2 /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		FF32830C19B6D8F900DBDEC7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				FF32830D19B6D8F900DBDEC7 /* Base */,
-			);
-			name = Main.storyboard;
-			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -715,10 +812,12 @@
 		};
 		CB8C725B196FB251006E4CF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 810951568E54E9BF3FE05E3F /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jong Lee (ZPV3G475SV)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Jong/Downloads,
@@ -728,17 +827,19 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
+				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		CB8C725C196FB251006E4CF2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CB12F46DDC8BD45A4580D516 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jong Lee (ZPV3G475SV)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Jong/Downloads,
@@ -748,7 +849,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
+				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -829,11 +930,12 @@
 		};
 		FF5BD2F919BD7FE400D45BFE /* Distribution */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10A00C764505AE6559FDB172 /* Pods.distribution.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jong Lee (ZPV3G475SV)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jong Lee (ZPV3G475SV)";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/Jong/Downloads,
@@ -843,7 +945,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "f1bb2ec7-4dac-457d-bf78-978d54ff4547";
+				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;
