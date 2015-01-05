@@ -51,6 +51,8 @@
 
 - (IBAction)donePressed:(id)sender {
     
+    NSLog(@"1");
+    
     if ([self.titleField.text length] == 0 || [self.contentsField.text length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Please fill out title and contents!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
@@ -59,6 +61,8 @@
     } else
     {
     
+        NSLog(@"1.2");
+        
         MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
         [hud setDetailsLabelText:@"Updating..."];
         [hud setDimBackground:YES];
@@ -69,15 +73,21 @@
         
         NSDate *parse_date = self.dateAndTime.date;
         
-
+        NSLog(@"1.4");
         
-        PFObject *event = [PFObject objectWithClassName:@"Karisma_Event"];
+        PFObject *event = [PFObject objectWithClassName:appDelegate.currentEvent];
+        
+        NSLog(@"%@", appDelegate.currentEvent);
+        
+        NSLog(@"1.5");
+        
         event[@"title"] = parse_title;
         event[@"contents"] = parse_contents;
         event[@"date"] = parse_date;
-            NSLog(@"ERROR HERE");
+
+        
         [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            NSLog(@"HI");
+            NSLog(@"1.8");
             if (error)
             {
                 NSLog(@"Error: %@", error);

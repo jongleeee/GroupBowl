@@ -76,7 +76,7 @@
         
         NSString *parse_title = [self.titleField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString *parse_news = [self.textField.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        PFObject *announcement = [PFObject objectWithClassName:self.currentAnnouncement];
+        PFObject *announcement = [PFObject objectWithClassName:appDelegate.currentAnnouncement];
         
         announcement[@"title"] = parse_title;
         announcement[@"news"] = parse_news;

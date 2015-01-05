@@ -10,6 +10,7 @@
 #import "EditDetailEventViewController.h"
 #import "AttendingListTableViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import <Venmo-iOS-SDK/Venmo.h>
 
 @interface DetailEventViewController ()
 
@@ -53,22 +54,34 @@
     self.date.text = dateString;
     self.contents.text = self.detailEvent[@"contents"];
     self.eventName.text = self.detailEvent[@"title"];
+ 
     
 }
 
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
     
+    NSLog(@"1.0");
     
     PFRelation *relation = [self.detailEvent objectForKey:@"attend"];
 
+    NSLog(@"1.2");
+    
     PFQuery *query = [relation query];
 
+    NSLog(@"1.4");
+    
     [query orderByAscending:@"name"];
 
+    NSLog(@"1.6");
+    
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        
+        NSLog(@"1.8");
+        
         if (error) {
             NSLog(@"Error: %@", error);
+            [self noData];
         }
         else
         {
@@ -78,6 +91,25 @@
     }];
     
     
+}
+
+- (void)noData {
+    // End the refreshing
+    if (self.refreshControl) {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"MMM d, h:mm a"];
+        NSString *title = [NSString stringWithFormat:@"Last update: %@", [formatter stringFromDate:[NSDate date]]];
+        NSDictionary *attrsDictionary = [NSDictionary dictionaryWithObject:[UIColor whiteColor]
+                                                                    forKey:NSForegroundColorAttributeName];
+        NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attrsDictionary];
+        self.refreshControl.attributedTitle = attributedTitle;
+        
+        [self.refreshControl endRefreshing];
+    }
+    
+    
+
 }
 
 
@@ -207,17 +239,53 @@
     
     if ([self.detailEvent[@"payment"] isEqualToString:@"YES"]) {
         
-        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
-
         
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Venmo coming..." message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
-        [alertView show];
+        float payAmountFloat = [self.detailEvent[@"fee"] floatValue];
+        
+        [[Venmo sharedInstance] setDefaultTransactionMethod:VENTransactionMethodAppSwitch];
+        
+        [[Venmo sharedInstance] sendPaymentTo:self.detailEvent[@"venmoId"]
+                                       amount:payAmountFloat*100 // this is in cents!
+                                         note:self.eventName.text
+                            completionHandler:^(VENTransaction *transaction, BOOL success, NSError *error) {
+                                if (success) {
+                                    
+                                    PFRelation *attending = [self.detailEvent relationForKey:@"attend"];
+                                    
+                                    [attending addObject:appDelegate.selectedGroupUser];
+                                    
+                                    
+                                    [self.detailEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                                        if (error)
+                                        {
+                                            
+                                        }
+                                        else
+                                        {
+                                            
+                                            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                                            
+                                            
+                                            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Attending" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                                            [alertView show];
+                                            
+                                            
+                                        }
+                                    }];
+                                    
+
+                                }
+                                else {
+                                    NSLog(@"Transaction failed with error: %@", [error localizedDescription]);
+                                }
+                            }];
+        
         
     } else {
         
         PFRelation *attending = [self.detailEvent relationForKey:@"attend"];
         
-        [attending addObject:appDelegate.currentUser];
+        [attending addObject:appDelegate.selectedGroupUser];
         
         
         [self.detailEvent saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

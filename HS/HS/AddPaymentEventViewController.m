@@ -19,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    appDelegate = [[UIApplication sharedApplication] delegate];
+
+    
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
@@ -52,7 +55,7 @@
 
 - (IBAction)donePressed:(id)sender {
     
-    if ([self.eventTitle.text length] == 0 || [self.eventDetail.text length] == 0 || [self.feeAmount.text length] == 0)
+    if ([self.eventTitle.text length] == 0 || [self.eventDetail.text length] == 0 || [self.feeAmount.text length] == 0 || [self.venmoId.text length] == 0)
     {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"Please fill out title and contents!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         
@@ -73,13 +76,17 @@
     
     NSDate *parse_date = self.eventDate.date;
     
+    NSString *parse_venmo = [self.venmoId.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    PFObject *event = [PFObject objectWithClassName:@"Karisma_Event"];
+    
+    PFObject *event = [PFObject objectWithClassName:appDelegate.currentEvent];
     event[@"title"] = parse_title;
     event[@"fee"] = parse_fee;
+    event[@"venmoId"] = parse_venmo;
     event[@"payment"] = @"YES";
     event[@"contents"] = parse_detail;
     event[@"date"] = parse_date;
+    PFRelation *attending = [event relationForKey:@"attend"];
 
     [event saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
 

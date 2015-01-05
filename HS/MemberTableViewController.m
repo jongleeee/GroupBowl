@@ -20,7 +20,6 @@
     [super viewDidLoad];
     appDelegate = [[UIApplication sharedApplication] delegate];
     self.currentUser = appDelegate.currentUser;
-    self.currentName = self.currentUser[@"name"];
 
     
     // Initialize the refresh control.
@@ -42,6 +41,7 @@
     if (appDelegate.currentGroupName) {
         self.currentMember = [appDelegate.currentGroupName stringByAppendingString:@"_Member"];
         appDelegate.currentMember = self.currentMember;
+        self.currentName = appDelegate.selectedGroupUser[@"name"];
     }
    
         

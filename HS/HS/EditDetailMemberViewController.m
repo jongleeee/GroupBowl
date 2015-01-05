@@ -68,11 +68,10 @@
     [hud setDetailsLabelText:@"Updating..."];
     [hud setDimBackground:YES];
     
-    NSString *changeTitle = @"title";
 
+    PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentMember];
+    [query whereKey:@"email" equalTo:self.userEmail];
     
-    PFQuery *query = [PFQuery queryWithClassName:appDelegate.currentGroupName];
-    [query whereKey:@"userNAME" equalTo:self.userID];
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (error)
         {

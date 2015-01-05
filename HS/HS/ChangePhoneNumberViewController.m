@@ -21,7 +21,7 @@
     
     [super viewDidLoad];
 
-    self.currentPhoneNumber.text = appDelegate.currentPhoneNumber;
+    self.currentPhoneNumber.text = appDelegate.selectedGroupUser[@"phone"];
     
 }
 
@@ -40,9 +40,9 @@
         [hud setDetailsLabelText:@"Updating..."];
         [hud setDimBackground:YES];
         
-        appDelegate.currentUser[@"phone"] = self.phoneNumber.text;
+        appDelegate.selectedGroupUser[@"phone"] = self.phoneNumber.text;
         
-        [appDelegate.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [appDelegate.selectedGroupUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
                 [self.navigationController popToRootViewControllerAnimated:NO];

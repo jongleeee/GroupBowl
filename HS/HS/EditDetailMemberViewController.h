@@ -24,4 +24,8 @@
 
 - (IBAction)updatePressed:(id)sender;
 
+
+@property (nonatomic, strong) NSString *userEmail;
+
+
 @end

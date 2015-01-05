@@ -170,6 +170,7 @@
         viewController.groupName = self.selectedGroupName;
         viewController.userName = self.selectedUserName;
         viewController.userID = self.selectedUserNAME;
+        viewController.userEmail = self.email.text;
     }
 }
 

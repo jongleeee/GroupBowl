@@ -21,7 +21,7 @@
     
     [super viewDidLoad];
     
-    self.currentName.text = appDelegate.currentName;
+    self.currentName.text = appDelegate.selectedGroupUser[@"name"];
     
 }
 
@@ -41,9 +41,9 @@
         [hud setDetailsLabelText:@"Updating..."];
         [hud setDimBackground:YES];
         
-        appDelegate.currentUser[@"name"] = self.name.text;
+        appDelegate.selectedGroupUser[@"name"] = self.name.text;
         
-        [appDelegate.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        [appDelegate.selectedGroupUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (!error) {
                 
                 appDelegate.currentName = self.name.text;
