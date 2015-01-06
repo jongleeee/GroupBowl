@@ -72,7 +72,7 @@
         [hud setDetailsLabelText:@"Signing in..."];
         [hud setDimBackground:YES];
         
-        
+        NSLog(@"1.0");
         [PFUser logInWithUsernameInBackground:parse_emailField password:parse_passwordField
                                         block:^(PFUser *user, NSError *error) {
                                             
@@ -81,20 +81,24 @@
                                             appDelegate.currentName = user[@"name"];
                                             appDelegate.currentPhoneNumber = user[@"phone"];
                                             
-                                            
+                                            NSLog(@"1.1");
+
                                             
                                             if (error) {
+                                                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                                                
                                                 UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Oops!" message:@"Incorrect email or password!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                                                 [alert show];
                                             } else {
+                                                
+                                                NSLog(@"1.2");
+
                                                 
                                                 appDelegate.currentUser = user;
 
                                                 [self getGroupIfAny:user];
                                                 
-                                                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
-                                                
-                                                [self.navigationController popToRootViewControllerAnimated:NO];
+
                                             }
                                         }];
         
@@ -109,6 +113,11 @@
 - (void)getGroupIfAny: (id)user {
     
     NSArray *tempGroup = user[@"groups"];
+
+    NSLog(@"1.4");
+    NSLog(@"%@", tempGroup);
+
+    
     if ([tempGroup count] != 0) {
         
         appDelegate.currentGroupName = [tempGroup objectAtIndex:0];
@@ -117,13 +126,50 @@
         
         PFQuery *selectQuery = [PFQuery queryWithClassName:selectGroup];
         [selectQuery whereKey:@"email" equalTo:appDelegate.currentEmail];
+        
+        NSLog(@"1.5");
+
+        
         [selectQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if (!error) {
                 appDelegate.selectedGroupUser = object;
                 appDelegate.currentName = object[@"name"];
                 appDelegate.currentPhoneNumber = object[@"phone"];
-                }
+                
+                PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+                [currentInstallation addUniqueObject:appDelegate.currentGroupName forKey:@"channels"];
+                [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        
+                        NSLog(@"1.7");
+
+                        
+                        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                        
+                        [self.navigationController popToRootViewControllerAnimated:NO];
+
+                    }
+                }];
+                
+            } else {
+                
+                NSLog(@"1.9");
+
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Please check your internet" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                [alerView show];
+                
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+            
         }];
+    } else {
+        
+        [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+        
+        [self.navigationController popToRootViewControllerAnimated:NO];
     }
 
     

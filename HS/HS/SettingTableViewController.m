@@ -38,7 +38,9 @@
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Request Sent" message:@"please check your email" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
         [alertView show];
         
-    } else if ([cell.reuseIdentifier isEqualToString:@"phoneNumber"]) {
+    } else if (!appDelegate.currentGroupName) {
+        
+    }else if ([cell.reuseIdentifier isEqualToString:@"phoneNumber"]) {
         [self performSegueWithIdentifier:@"changePhoneNumber" sender:self];
         
     } else if ([cell.reuseIdentifier isEqualToString:@"name"]) {

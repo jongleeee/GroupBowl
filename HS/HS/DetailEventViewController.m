@@ -177,6 +177,15 @@
     PFObject *user = [self.attendingList objectAtIndex:indexPath.row];
     
     cell.textLabel.text = user[@"name"];
+    
+    if ([cell.textLabel.text isEqualToString:appDelegate.selectedGroupUser[@"name"]])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    } else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+    
     return cell;
 }
 
@@ -276,6 +285,8 @@
 
                                 }
                                 else {
+                                    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                                    
                                     NSLog(@"Transaction failed with error: %@", [error localizedDescription]);
                                 }
                             }];

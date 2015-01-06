@@ -9,6 +9,8 @@
 #import "SelectGroupTableViewController.h"
 #import "MainTabBarViewController.h"
 #import <MBProgressHUD/MBProgressHUD.h>
+#import "NewsFeedTableViewController.h"
+
 
 @interface SelectGroupTableViewController ()
 
@@ -72,10 +74,24 @@
 
 - (void)getLatestGroups {
     
-    appDelegate.groups = appDelegate.currentUser[@"groups"];
+    NSLog(@"$$$$$$$$$$$$$$");
+    NSLog(@"%@", appDelegate.currentEmail);
+    
+    PFQuery *currentUser = [PFUser query];
+    [currentUser whereKey:@"email" equalTo:appDelegate.currentEmail];
+    [currentUser getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+        if (!error) {
+            appDelegate.groups = object[@"groups"];
+            self.groups = appDelegate.groups;
+            
+        }
+        [self reloadData];
+    }];
+
+    
+    NSLog(@"%@", appDelegate.currentUser);
     
     
-    [self reloadData];
 
 }
 
@@ -104,7 +120,6 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    NSLog(@"%@", self.groups);
     
     
     if ([self.groups count] == 0) {
@@ -173,11 +188,33 @@
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
         if (!error) {
-            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
             
-            appDelegate.selectedGroupUser = object;
+            PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+            [currentInstallation addUniqueObject:appDelegate.currentGroupName forKey:@"channels"];
+            [currentInstallation saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (!error) {
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                    
+                    appDelegate.selectedGroupUser = object;
+                    
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
+                } else {
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                    
+                    UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Please check your internet" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                    [alerView show];
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
+                    
+                }
+            }];
             
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            
         }
     }];
     

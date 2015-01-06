@@ -48,6 +48,17 @@
     selectedIndex = -1;
     
     
+    if (appDelegate.currentGroupName) {
+        
+        [self setRefresh];
+        
+    }
+    
+    
+}
+
+- (void)setRefresh {
+    
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
@@ -56,9 +67,7 @@
                             action:@selector(getLatestEvents)
                   forControlEvents:UIControlEventValueChanged];
     
-    
 }
-
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -69,8 +78,9 @@
         appDelegate.currentEvent = self.currentEvent;
     }
     
-    
-   
+    if (!self.refreshControl && appDelegate.currentGroupName) {
+        [self setRefresh];
+    }
         
 //        PFQuery *query = [PFQuery queryWithClassName:@"Karisma_Event"];
 //        

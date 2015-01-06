@@ -51,6 +51,13 @@
                 [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
                 [self.navigationController popToRootViewControllerAnimated:NO];
                 
+            } else {
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Please check your internet" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                [alerView show];
+                
             }
         }];
         

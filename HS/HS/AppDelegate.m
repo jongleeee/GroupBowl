@@ -21,21 +21,23 @@
 
     // Override point for customization after application launch.
     
-    [NSThread sleepForTimeInterval:1.3];
+    [NSThread sleepForTimeInterval:1.8];
     
     [Parse setApplicationId:@"nqi7esegIm4RP8lREeDJ2TAkVXFvaxZiKArce63Y"
                   clientKey:@"BFSzX2cK1IiDXKKU9ax7pHu8fIOBfUcX1GwdZy4L"];
     
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    UIUserNotificationSettings *settings =
-    [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert |
-     UIUserNotificationTypeBadge |
-     UIUserNotificationTypeSound
-                                      categories:nil];
-    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-    [[UIApplication sharedApplication] registerForRemoteNotifications];
-
+    
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *set = [UIUserNotificationSettings settingsForTypes:userNotificationTypes
+                                                                             categories:nil];
+    [application registerUserNotificationSettings:set];
+    [application registerForRemoteNotifications];
+    
+    
     
     [[UITabBar appearance] setTintColor:[UIColor colorWithRed:0.749 green:0.176 blue:0.263 alpha:1]];
     
@@ -57,20 +59,27 @@
         self.groups = self.currentUser[@"groups"];
         NSLog(@"%@", [self.groups class]);
         
-        if ([self.groups count] != 0) {
-            self.currentGroupName = [self.groups objectAtIndex:0];
-            
-            NSString *selectGroup = [self.currentGroupName stringByAppendingString:@"_Member"];
-            PFQuery *selectQuery = [PFQuery queryWithClassName:selectGroup];
-            [selectQuery whereKey:@"email" equalTo:self.currentEmail];
-            [selectQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
-                if (!error) {
-                    self.selectedGroupUser = object;
-                    self.currentName = self.currentUser[@"name"];
-                    self.currentPhoneNumber = self.currentUser[@"phone"];
-                }
-            }];
-        }
+//        if ([self.groups count] != 0) {
+//            self.currentGroupName = [self.groups objectAtIndex:0];
+//            
+//            NSString *selectGroup = [self.currentGroupName stringByAppendingString:@"_Member"];
+//            PFQuery *selectQuery = [PFQuery queryWithClassName:selectGroup];
+//            [selectQuery whereKey:@"email" equalTo:self.currentEmail];
+//            [selectQuery getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+//                if (!error) {
+//                    self.selectedGroupUser = object;
+//                    self.currentName = self.currentUser[@"name"];
+//                    self.currentPhoneNumber = self.currentUser[@"phone"];
+//                    
+//                    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+//                    [currentInstallation addUniqueObject:self.currentGroupName forKey:@"channels"];
+//                    [currentInstallation saveInBackground];
+//
+//
+//
+//                }
+//            }];
+//        }
         
 
 //        self.currentUserName = self.currentUser[@"username"];

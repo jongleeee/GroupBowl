@@ -93,15 +93,25 @@
         if (error)
         {
             NSLog(@"Error: %@", error);
+            
+            [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+            
+            UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Please check your internet" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+            [alerView show];
+            
+            
         }
         else
         {
-            PFQuery *pushQuery = [PFInstallation query];
-            [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
             
-            // Send push notification to query
-            [PFPush sendPushMessageToQueryInBackground:pushQuery
-                                           withMessage:@"New event!"];
+            PFPush *push = [[PFPush alloc] init];
+            [push setChannel:appDelegate.currentGroupName];
+            
+            NSString *eventTitle = [@"Event: " stringByAppendingString:parse_title];
+
+            [push setMessage:eventTitle];
+            [push sendPushInBackground];
+            
             
             [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
 

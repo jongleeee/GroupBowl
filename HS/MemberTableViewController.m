@@ -22,6 +22,16 @@
     self.currentUser = appDelegate.currentUser;
 
     
+    if (appDelegate.currentGroupName) {
+        
+        [self setRefresh];
+        
+    }
+    
+}
+
+- (void)setRefresh {
+    
     // Initialize the refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
@@ -44,7 +54,11 @@
         self.currentName = appDelegate.selectedGroupUser[@"name"];
     }
    
-        
+    
+    if (!self.refreshControl && appDelegate.currentGroupName) {
+        [self setRefresh];
+    }
+    
 //        PFQuery *query = [PFUser query];
 //        [query orderByAscending:@"name"];
 //        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {

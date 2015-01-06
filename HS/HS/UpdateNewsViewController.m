@@ -83,21 +83,35 @@
         [announcement saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error)
             {
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                
+                UIAlertView *alerView = [[UIAlertView alloc] initWithTitle:@"Error!" message:@"Please check your internet" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                [alerView show];
+                                
+                
                 NSLog(@"Error: %@", error);
             }
             else
             {
                 
-                PFQuery *pushQuery = [PFInstallation query];
-                [pushQuery whereKey:@"deviceType" equalTo:@"ios"];
+                PFPush *push = [[PFPush alloc] init];
+                [push setChannel:appDelegate.currentGroupName];
+            
+
+                [push setMessage:parse_title];
+                [push sendPushInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    
+                    
+                    [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                    
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                }];
                 
-                // Send push notification to query
-                [PFPush sendPushMessageToQueryInBackground:pushQuery
-                                               withMessage:@"Announcement made!"];
 
-                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
-
-                [self.navigationController popToRootViewControllerAnimated:YES];
+//                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+//
+//                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }];
         

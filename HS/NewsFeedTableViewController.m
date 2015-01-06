@@ -36,37 +36,52 @@
 
     
     if (appDelegate.currentGroupName) {
-        // Initialize the refresh control.
-        self.refreshControl = [[UIRefreshControl alloc] init];
-        self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
-        self.refreshControl.tintColor = [UIColor whiteColor];
-        [self.refreshControl addTarget:self
-                                action:@selector(getLatestNewsFeed)
-                      forControlEvents:UIControlEventValueChanged];
+        
+        [self setRefresh];
+        
     }
     
-    
-    
-    
-    
-
 
 }
 
 
+
+
+- (void)setRefresh {
+    
+    // Initialize the refresh control.
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    self.refreshControl.backgroundColor = [UIColor colorWithRed:0.498 green:0.549 blue:0.553 alpha:1];
+    self.refreshControl.tintColor = [UIColor whiteColor];
+    [self.refreshControl addTarget:self
+                            action:@selector(getLatestNewsFeed)
+                  forControlEvents:UIControlEventValueChanged];
+    
+}
+
 - (void)viewWillAppear:(BOOL)animated
 {
-    
+    [super viewWillAppear:animated];
 //    NSLog(@"%@", appDelegate.currentUser);
     
     if (!appDelegate.currentUser)
     {
         [self performSegueWithIdentifier:@"loginView" sender:self];
+        return;
     }
     
     if (appDelegate.currentGroupName) {
         self.currentAnnouncement = [appDelegate.currentGroupName stringByAppendingString:@"_Announcement"];
         appDelegate.currentAnnouncement = self.currentAnnouncement;
+    }
+    
+    if (!self.refreshControl && appDelegate.currentGroupName) {
+        [self setRefresh];
+    }
+    
+    if (!appDelegate.currentGroupName) {
+        [self performSegueWithIdentifier:@"selectGroup" sender:self];
+
     }
     
     NSLog(@"%@", self.currentAnnouncement);

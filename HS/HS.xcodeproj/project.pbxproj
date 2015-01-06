@@ -174,6 +174,8 @@
 		FF32837619B6DB8C00DBDEC7 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
 		FF48DF1319BA3607005E349D /* DetailEventViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailEventViewController.h; sourceTree = "<group>"; };
 		FF48DF1419BA3607005E349D /* DetailEventViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailEventViewController.m; sourceTree = "<group>"; };
+		FF4B5C5E1A5B39AE009E5D05 /* XC_comheapstackgroupapp.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; name = XC_comheapstackgroupapp.mobileprovision; path = ../../../../Desktop/XC_comheapstackgroupapp.mobileprovision; sourceTree = "<group>"; };
+		FF4B5C5F1A5B5718009E5D05 /* checkingNewPhone.mobileprovision */ = {isa = PBXFileReference; lastKnownFileType = file; name = checkingNewPhone.mobileprovision; path = ../../../../Desktop/checkingNewPhone.mobileprovision; sourceTree = "<group>"; };
 		FF5BD2DD19BBA00A00D45BFE /* EditDetailMemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditDetailMemberViewController.h; sourceTree = "<group>"; };
 		FF5BD2DE19BBA00A00D45BFE /* EditDetailMemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditDetailMemberViewController.m; sourceTree = "<group>"; };
 		FF5BD2E319BBB31300D45BFE /* SelectGroupTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectGroupTableViewController.h; sourceTree = "<group>"; };
@@ -257,6 +259,8 @@
 		CB8C721C196FB251006E4CF2 = {
 			isa = PBXGroup;
 			children = (
+				FF4B5C5F1A5B5718009E5D05 /* checkingNewPhone.mobileprovision */,
+				FF4B5C5E1A5B39AE009E5D05 /* XC_comheapstackgroupapp.mobileprovision */,
 				FF2D44BA1A51DFC100FC0F16 /* Podfile */,
 				FF5BD2F619BD7D1C00D45BFE /* GroupBowl.mobileprovision */,
 				FF3282FC19B6D5AF00DBDEC7 /* Parse.framework */,
@@ -827,7 +831,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
+				PROVISIONING_PROFILE = "fe7760ae-160f-4deb-8e3b-56b4f6392b74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -849,7 +853,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
+				PROVISIONING_PROFILE = "fe7760ae-160f-4deb-8e3b-56b4f6392b74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -945,7 +949,7 @@
 				GCC_PREFIX_HEADER = "HS/HS-Prefix.pch";
 				INFOPLIST_FILE = "HS/HS-Info.plist";
 				PRODUCT_NAME = GroupBowl;
-				PROVISIONING_PROFILE = "b2e81f64-b919-4c00-b4c0-ead3d741cd7f";
+				PROVISIONING_PROFILE = "fe7760ae-160f-4deb-8e3b-56b4f6392b74";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Distribution;

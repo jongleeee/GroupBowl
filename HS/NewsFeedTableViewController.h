@@ -22,4 +22,7 @@
 @property (strong, nonatomic) PFUser *currentUser;
 @property (strong, nonatomic) NSString *currentAnnouncement;
 
+
+- (void)setRefresh;
+
 @end

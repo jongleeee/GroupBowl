@@ -139,6 +139,10 @@
             if (error) {
                 NSLog(@"Error: %@ %@", error, [error userInfo]);
                 
+                
+                [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
+                
+                
                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Oops!" message:@"Username has already been taken!" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                 
                 [alertView show];
@@ -147,10 +151,13 @@
             else
             {
                 appDelegate.currentUser = user;
+                appDelegate.currentEmail = user.email;
+                appDelegate.currentName = parse_nameField;
+                appDelegate.currentPhoneNumber = parse_phoneField;
                 
                 [MBProgressHUD hideAllHUDsForView:self.view animated:NO];
 
-                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to GroupBowl" message:@"Thanks" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Welcome to GroupBowl" message:nil delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil, nil];
                 
                 [alertView show];
 
